@@ -64,9 +64,6 @@ public class enrollment extends JFrame {
 	    
 	    jlistOneModel = new DefaultListModel();
 	    jlistTwoModel = new DefaultListModel();
-	    
-	    	    
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Sepiow\\Pictures\\Kromegalul.png"));
 		setTitle("ENROLLMENT FORM");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 438, 759);
