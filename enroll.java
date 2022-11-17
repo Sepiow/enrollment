@@ -27,6 +27,8 @@ public class enrollment extends JFrame {
 	private final ButtonGroup rightbutton = new ButtonGroup();
 	private final ButtonGroup leftbutton = new ButtonGroup();
 	private final ButtonGroup compute = new ButtonGroup();
+	private final ButtonGroup btnGroup1 = new ButtonGroup();
+	
 
 	/**
 	 * Launch the application.
@@ -48,6 +50,14 @@ public class enrollment extends JFrame {
 	
 	DefaultListModel jlistOneModel,jlistTwoModel;
 	String str[]= {"MAT211E", "ENG211", "CPE211", "CPE211LAB", "GE105", "GE106", "DR211", "DR211LAB", "EE211", "EE211LAB", "PE113"};
+	Double courseprice;
+	Double coursetotal;
+	Double discount5;
+	Double discount10;
+	Double discount15;
+	Double totaldiscount;
+	Integer coursecount;
+	
 	
 	
 	    public enrollment() {
@@ -167,6 +177,7 @@ public class enrollment extends JFrame {
 		panel_1_1_1.add(lblStudent);
 		
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("5% DISCOUNT");
+		btnGroup1.add(rdbtnNewRadioButton);
 		rdbtnNewRadioButton.setFont(new Font("Gill Sans MT", Font.PLAIN, 13));
 		rdbtnNewRadioButton.setBackground(new Color(158, 72, 112));
 		rdbtnNewRadioButton.setForeground(new Color(255, 255, 255));
@@ -174,6 +185,7 @@ public class enrollment extends JFrame {
 		contentPane.add(rdbtnNewRadioButton);
 		
 		JRadioButton rdbtnDiscount = new JRadioButton("10% DISCOUNT");
+		btnGroup1.add(rdbtnDiscount);
 		rdbtnDiscount.setForeground(new Color(255, 255, 255));
 		rdbtnDiscount.setFont(new Font("Gill Sans MT", Font.PLAIN, 13));
 		rdbtnDiscount.setBackground(new Color(158, 72, 112));
@@ -181,6 +193,7 @@ public class enrollment extends JFrame {
 		contentPane.add(rdbtnDiscount);
 		
 		JRadioButton rdbtnDiscount_1 = new JRadioButton("15% DISCOUNT");
+		btnGroup1.add(rdbtnDiscount_1);
 		rdbtnDiscount_1.setForeground(new Color(255, 255, 255));
 		rdbtnDiscount_1.setFont(new Font("Gill Sans MT", Font.PLAIN, 13));
 		rdbtnDiscount_1.setBackground(new Color(158, 72, 112));
@@ -273,6 +286,14 @@ public class enrollment extends JFrame {
 			
 			}
 		});
+		
+		JLabel lblPayment = new JLabel("");
+		lblPayment.setForeground(Color.WHITE);
+		lblPayment.setFont(new Font("Gill Sans MT", Font.PLAIN, 20));
+		lblPayment.setBackground(new Color(251, 251, 251));
+		lblPayment.setBounds(87, 630, 244, 24);
+		contentPane.add(lblPayment);
+		
 		leftbutton.setForeground(new Color(46, 37, 50));
 		leftbutton.setBackground(new Color(239, 188, 213));
 		leftbutton.setOpaque(true);
@@ -282,6 +303,79 @@ public class enrollment extends JFrame {
 		contentPane.add(leftbutton);
 		
 		JButton computebutton = new JButton("COMPUTE");
+		computebutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//set variable
+				coursetotal = (double)0;
+				coursecount = (Integer)0;
+				discount5 = (double)0.05;
+				discount10 = (double)0.10;
+				discount15 = (double)0.15;
+				totaldiscount = (double)0.0;
+				coursecount = jlistTwoModel.getSize();
+				//5%discount
+				if(rdbtnNewRadioButton.isSelected()) {
+					
+					coursetotal = coursecount * 1000.00;
+					
+					//500php
+					if(jlistTwoModel.contains("CPE211LAB")) {
+						coursetotal = coursetotal + 500 - 1000;					 
+					}
+					if(jlistTwoModel.contains("EE211LAB")) {
+						coursetotal = coursetotal + 500 - 1000;	
+					}
+					if(jlistTwoModel.contains("DR211LAB")) {
+						coursetotal = coursetotal + 500 - 1000;	
+					}
+					totaldiscount = coursetotal * discount5;
+					coursetotal = coursetotal-totaldiscount;
+					lblPayment.setText(coursetotal.toString());
+					
+				}
+				//10%discount
+				if(rdbtnDiscount.isSelected()) {
+					
+					coursetotal = coursecount * 1000.00;
+					
+					//500php
+					if(jlistTwoModel.contains("CPE211LAB")) {
+						coursetotal = coursetotal + 500 - 1000;					 
+					}
+					if(jlistTwoModel.contains("EE211LAB")) {
+						coursetotal = coursetotal + 500 - 1000;	
+					}
+					if(jlistTwoModel.contains("DR211LAB")) {
+						coursetotal = coursetotal + 500 - 1000;	
+					}
+					totaldiscount = coursetotal * discount10;
+					coursetotal = coursetotal-totaldiscount;
+					lblPayment.setText(coursetotal.toString());
+					
+				}
+				//15%discount
+				if(rdbtnDiscount_1.isSelected()) {
+					
+					coursetotal = coursecount * 1000.00;
+					
+					//500php
+					if(jlistTwoModel.contains("CPE211LAB")) {
+						coursetotal = coursetotal + 500 - 1000;					 
+					}
+					if(jlistTwoModel.contains("EE211LAB")) {
+						coursetotal = coursetotal + 500 - 1000;	
+					}
+					if(jlistTwoModel.contains("DR211LAB")) {
+						coursetotal = coursetotal + 500 - 1000;	
+					}
+					totaldiscount = coursetotal * discount15;
+					coursetotal = coursetotal-totaldiscount;
+					lblPayment.setText(coursetotal.toString());
+					
+				}
+				
+			}
+		});
 		computebutton.setOpaque(true);
 		computebutton.setBorderPainted(false);
 		computebutton.setForeground(new Color(46, 37, 50));
@@ -289,7 +383,6 @@ public class enrollment extends JFrame {
 		computebutton.setFont(new Font("Roboto", Font.BOLD, 18));
 		computebutton.setBounds(0, 663, 127, 41);
 		contentPane.add(computebutton);
-		
 		
 	}
 }
